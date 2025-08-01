@@ -1,0 +1,24 @@
+services:
+  web:
+    build: .
+    container_name: dotnetfileportal_web
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5002
+      - Jwt__Key=${JWT_KEY}
+      - Jwt__Issuer=${JWT_ISSUER}
+      - Jwt__Audience=${JWT_AUDIENCE}
+      - Jwt__Duration=${JWT_DURATION}
+      - GatewayUrls__Auth=${BASE_GATEWAY_URL}${AUTH_GATEWAY_URL}
+      - GatewayUrls__Files=${BASE_GATEWAY_URL}${FILE_GATEWAY_URL}
+    ports:
+      - "5005:5002"
+    networks:
+      fileupload_file_upload_network:
+        ipv4_address: 172.16.0.6
+    volumes:
+      - ./keys:/root/.aspnet/DataProtection-Keys
+
+networks:
+  fileupload_file_upload_network:
+    external: true

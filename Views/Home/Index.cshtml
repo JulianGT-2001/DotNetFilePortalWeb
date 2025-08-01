@@ -1,0 +1,78 @@
+﻿@model IEnumerable<fileuploadweb.Models.ViewModel.UserFilesViewModel>
+@{
+    ViewData["Title"] = "Dotnet file portal - files";
+}
+
+<div class="row min-vh-100 justify-content-center">
+    <div class="col-12">
+        <div class="p-4 rounded bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2 class="fw-bold px-2 py-3 mb-0">My Files</h2>
+                <button type="button" class="btn btn-primary rounded border-0" data-toggle="modal" data-target="#fileModal">
+                    <span>Add New</span>
+                </button>
+            </div>
+            <table class="table table-responsive table-hover table-striped table-bordered rounded">
+                <thead>
+                    <tr>
+                        <th class="d-none">Id</th>
+                        <th>Original name</th>
+                        <th>Size</th>
+                        <th>Uploaded at</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var file in Model)
+                    {
+                        <tr>
+                            <td class="d-none">@file.Id</td>
+                            <td>@file.OriginalName</td>
+                            <td>@file.SizeInBytes bytes</td>
+                            <td>@file.UploadedAt</td>
+                            <td>
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <form asp-action="Delete" asp-controller="File" method="post">
+                                        <input class="d-none" type="hidden" name="guid" value="@file.Id" />
+                                        <button class="btn btn-danger" type="submit" ><span class="fw-bold">Delete</span></button>
+                                    </form>
+                                    <form asp-action="GetFileContent" asp-controller="File" method="get">
+                                        <input class="d-none" type="hidden" name="guid" value="@file.Id" />
+                                        <input class="d-none" type="hidden" name="fileNameParam" value="@file.OriginalName" />
+                                        <button class="btn btn-success" type="submit" ><span class="fw-bold">Download</span></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="fileModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Upload file</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Upload" asp-controller="File" enctype="multipart/form-data" method="post" autocomplete="off">
+                    <div class="mb-3">
+                        <label for="" class="form-label">Archivo: <span class="text-danger">*</span></label>
+                        <input type="file" class="form-control" name="files" placeholder="Elija un archivo" multiple required />
+                    </div>
+                    <div class="d-flex pt-3 pb-3">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <span>Upload</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+@model fileuploadweb.Models.Dto.RegisterDto
+
+@{
+    ViewData["Title"] = "Dotnet file portal register";
+}
+
+<div class="row min-vh-100 justify-content-center">
+    <div class="col-12">
+        <div class="p-4 rounded bg-white">
+            <h2 class="fw-bold px-2 text-center pb-3 pt-3">Create your account</h2>
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+            <form asp-action="Register" asp-controller="Auth" method="post" autocomplete="off">
+                <div class="mb-3">
+                    <label asp-for="email" class="form-label mb-1">Email</label>
+                    <input asp-for="email" class="form-control rounded border-0 p-3" style="background-color: #e7edf4; color: #0d141c;" placeholder="Enter your email" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="fullName" class="form-label mb-1">Fullname</label>
+                    <input asp-for="fullName" class="form-control rounded border-0 p-3" style="background-color: #e7edf4; color: #0d141c;" placeholder="Enter your fullname" />
+                    <span asp-validation-for="fullName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="password" class="form-label mb-1">Password</label>
+                    <input asp-for="password" class="form-control rounded border-0 p-3" style="background-color: #e7edf4; color: #0d141c;" placeholder="Enter your password" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="confirmPassword" class="form-label mb-1">Confirm Password</label>
+                    <input asp-for="confirmPassword" class="form-control rounded border-0 p-3" style="background-color: #e7edf4; color: #0d141c;" placeholder="Enter your password again" />
+                    <span asp-validation-for="confirmPassword" class="text-danger"></span>
+                </div>
+                <div class="d-flex pt-3 pb-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <span>Create account</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
