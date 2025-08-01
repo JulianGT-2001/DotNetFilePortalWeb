@@ -74,6 +74,6 @@ MIT — Uso libre para fines académicos o empresariales.
 
 ## 🙌 Autor
 
-**Julian Gonzalez**  
-📧 contacto@tucorreo.com  
-🔗 [LinkedIn](https://linkedin.com/in/tuusuario)
+**Julian Dario Gonzalez Toledo**  
+📧 juliant.2001@outlook.com
+🔗 [LinkedIn](https://www.linkedin.com/in/julian-dario-gonzalez-toledo-402482223/)
