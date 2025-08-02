@@ -32,6 +32,24 @@ namespace fileuploadweb.Negocio.Logica
             var response = await _http.PeticionHttpPost<TParam, TReturn>(param, $"{_urlsGateway.Auth}register");
             return response;
         }
+
+        public async Task<TReturn> ObtenerUsuarioAsync<TReturn>(string token)
+        {
+            var response = await _http.PeticionHttpGet<TReturn>($"{_urlsGateway.Auth}", token);
+            return response;
+        }
+
+        public async Task<TReturn> ReiniciarClaveDeAutenticacionAsync<TReturn, TParam>(TParam param, string token)
+        {
+            var response = await _http.PeticionHttpGet<TReturn>($"{_urlsGateway.Auth}{param}/reiniciar_clave_de_autenticacion", token);
+            return response;
+        }
+
+        public async Task<TReturn> ObtenerClaveDeAutenticacionAsync<TReturn, TParam>(TParam param, string token)
+        {
+            var response = await _http.PeticionHttpGet<TReturn>($"{_urlsGateway.Auth}{param}/obtener_clave_de_autenticacion", token);
+            return response;
+        }
         #endregion
     }
 }
