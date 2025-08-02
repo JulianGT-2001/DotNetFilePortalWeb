@@ -1,7 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using fileuploadweb.Models.Dto;
+using fileuploadweb.Models.ViewModel;
 using fileuploadweb.Negocio.Contrato;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace fileuploadweb.Controllers
@@ -32,6 +34,33 @@ namespace fileuploadweb.Controllers
         {
             RegisterDto registerDto = new RegisterDto();
             return View(registerDto);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> ActivateAuthenticator()
+        {
+            string? token = Request.Cookies["jwt_token"];
+            if (string.IsNullOrEmpty(token))
+                return Unauthorized();
+
+            var usuario = await _auth.ObtenerUsuarioAsync<ApplicationUserDto?>(token);
+
+            if (usuario == null)
+                return NotFound();
+
+            await _auth.ReiniciarClaveDeAutenticacionAsync<bool, ApplicationUserDto>(usuario, token);
+            string tokenAuth = await _auth.ObtenerClaveDeAutenticacionAsync<string, ApplicationUserDto>(usuario, token);
+
+            if (string.IsNullOrEmpty(tokenAuth))
+                return Unauthorized();
+
+            var adf = new AutenticacionDosFactoresViewModel
+            {
+                Token = tokenAuth
+            };
+
+            return View(adf);
         }
 
         [HttpPost]
