@@ -1,6 +1,6 @@
 
 using System.Text;
-// using DotNetEnv;
+using DotNetEnv;
 using fileuploadweb.Models.Dto;
 using fileuploadweb.Negocio.Contrato;
 using fileuploadweb.Negocio.Logica;
@@ -10,24 +10,24 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.IdentityModel.Tokens;
 
-// Env.Load();
+Env.Load();
 
-// var baseGatewayUrl = Environment.GetEnvironmentVariable("BASE_GATEWAY_URL");
-// var authGatewayUrl = Environment.GetEnvironmentVariable("AUTH_GATEWAY_URL");
-// var fileGatewayUrl = Environment.GetEnvironmentVariable("FILE_GATEWAY_URL");
-// var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
-// var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
-// var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
-// var jwtDuration = Environment.GetEnvironmentVariable("JWT_DURATION");
+var baseGatewayUrl = Environment.GetEnvironmentVariable("BASE_GATEWAY_URL");
+var authGatewayUrl = Environment.GetEnvironmentVariable("AUTH_GATEWAY_URL");
+var fileGatewayUrl = Environment.GetEnvironmentVariable("FILE_GATEWAY_URL");
+var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY");
+var jwtIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
+var jwtAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE");
+var jwtDuration = Environment.GetEnvironmentVariable("JWT_DURATION");
 
 var builder = WebApplication.CreateBuilder(args);
 
-// builder.Configuration["GatewayUrls:Auth"] = baseGatewayUrl + authGatewayUrl;
-// builder.Configuration["GatewayUrls:Files"] = baseGatewayUrl + fileGatewayUrl;
-// builder.Configuration["Jwt:Key"] = jwtKey;
-// builder.Configuration["Jwt:Issuer"] = jwtIssuer;
-// builder.Configuration["Jwt:Audience"] = jwtAudience;
-// builder.Configuration["Jwt:Duration"] = jwtDuration;
+builder.Configuration["GatewayUrls:Auth"] = baseGatewayUrl + authGatewayUrl;
+builder.Configuration["GatewayUrls:Files"] = baseGatewayUrl + fileGatewayUrl;
+builder.Configuration["Jwt:Key"] = jwtKey;
+builder.Configuration["Jwt:Issuer"] = jwtIssuer;
+builder.Configuration["Jwt:Audience"] = jwtAudience;
+builder.Configuration["Jwt:Duration"] = jwtDuration;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
