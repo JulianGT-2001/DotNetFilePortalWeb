@@ -49,8 +49,8 @@ namespace fileuploadweb.Controllers
             if (usuario == null)
                 return NotFound();
 
-            await _auth.ReiniciarClaveDeAutenticacionAsync<bool, ApplicationUserDto>(usuario, token);
-            string tokenAuth = await _auth.ObtenerClaveDeAutenticacionAsync<string, ApplicationUserDto>(usuario, token);
+            await _auth.ReiniciarClaveDeAutenticacionAsync<bool, string>(usuario.email!, token);
+            string tokenAuth = await _auth.ObtenerClaveDeAutenticacionAsync<string, string>(usuario.email!, token);
 
             if (string.IsNullOrEmpty(tokenAuth))
                 return Unauthorized();
